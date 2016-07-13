@@ -1,0 +1,5 @@
+[run]
+include = actio_control/*
+omit = *migrations*, *tests*
+plugins =
+    django_coverage_plugin
