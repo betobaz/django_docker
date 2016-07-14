@@ -48,4 +48,8 @@ redis>=2.10.0
 
 
 
+
 # Your custom requirements go here
+
+# Twitter bootstrap
+django-bootstrap3==7.0.1
