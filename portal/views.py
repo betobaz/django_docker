@@ -17,16 +17,23 @@ def get_singup(request):
                 form.cleaned_data['client_id'], 
                 form.cleaned_data['client_secret']
             )
-            sugarApi.oauth2_token(
+            result = sugarApi.oauth2_token(
                 form.cleaned_data['username'], 
                 form.cleaned_data['password']
             )
-            pdb.set_trace()
-
-            return HttpResponseRedirect('/thanks/')
-
+            if result['status_code'] == 200: 
+                return HttpResponseRedirect('/portal/signup-success/')
+            else:
+                return HttpResponseRedirect('/portal/signup-error/')
+            
     # if a GET (or any other method) we'll create a blank form
     else:
         form = SignUpForm()
 
     return render(request, 'portal/signup.html', {'form': form})
+
+def get_singup_success(request):
+    return render(request, 'portal/signup-success.html', {})
+
+def get_singup_error(request):
+    return render(request, 'portal/signup-error.html', {})

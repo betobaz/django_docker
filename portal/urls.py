@@ -12,4 +12,14 @@ urlpatterns = [
         view=views.get_singup,
         name='portal-signup'
     ),
+    url(
+        regex=r'^signup-success/$',
+        view=views.get_singup_success,
+        name='portal-signup-success'
+    ),
+    url(
+        regex=r'^signup-error/$',
+        view=views.get_singup_error,
+        name='portal-signup-error'
+    ),
 ]
