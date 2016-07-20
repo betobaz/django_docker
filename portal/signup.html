@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+
+<form action="/portal/signup/" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Submit" />
+</form>

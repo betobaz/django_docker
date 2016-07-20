@@ -6,7 +6,8 @@ from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
-from instances.models import Instance
+import uuid
+from portal.models import Instance
 
 
 @python_2_unicode_compatible
@@ -14,15 +15,16 @@ class User(AbstractUser):
 
     # First Name and Last Name do not cover name patterns
     # around the globe.
+    #uuid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    name = models.CharField(_('Name'), blank=True, max_length=255)
     sugar_username = models.CharField(_('Sugar Username'), blank=True, max_length=255)
     sugar_id = models.CharField(_('Sugar ID'), blank=True, max_length=255)
     access_token = models.CharField(_('Sugar Access Token'), blank=True, max_length=255)
     refresh_token = models.CharField(_('Sugar Refresh Token'), blank=True, max_length=255)
-    instance = models.ForeignKey(Instance, on_delete=models.CASCADE)
-    uuid = models.CharField(_('External ID'), max_length=64, default=uuid.uuid1())
+    instance = models.ForeignKey(Instance, on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self):
-        return self.username
+        return self.sugar_username
 
     def get_absolute_url(self):
-        return reverse('users:detail', kwargs={'username': self.username})
+        return reverse('users:detail', kwargs={'sugar_username': self.sugar_username})

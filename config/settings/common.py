@@ -47,6 +47,7 @@ LOCAL_APPS = (
     # custom users app
     'actio_control.users.apps.UsersConfig',
     # Your stuff: custom apps go here
+    'portal.apps.PortalConfig',
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps

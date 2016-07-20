@@ -51,5 +51,6 @@ redis>=2.10.0
 
 # Your custom requirements go here
 
-# Twitter bootstrap
-django-bootstrap3==7.0.1
+# request
+requests==2.10.0
+requests-toolbelt==0.6.2
