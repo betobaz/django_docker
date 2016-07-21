@@ -1,4 +1,5 @@
 from django import forms
+from .lib.sugarcrm_api_py.SugarCRMAPI import SugarCRMAPI 
 
 class SignUpForm(forms.Form):
     instance_url = forms.URLField(label='You instance URL', max_length=100)
@@ -7,3 +8,15 @@ class SignUpForm(forms.Form):
     username = forms.CharField(label='Username', max_length=100)
     password = forms.CharField(label='Password', max_length=100, widget=forms.PasswordInput)
 
+    def login_sugar(self):
+        sugarApi = SugarCRMAPI(
+            self.cleaned_data['instance_url'], 
+            self.cleaned_data['client_id'], 
+            self.cleaned_data['client_secret']
+        )
+        result = sugarApi.oauth2_token(
+            self.cleaned_data['username'], 
+            self.cleaned_data['password']
+        )
+
+        return result

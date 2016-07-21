@@ -5,40 +5,26 @@ from django.views.generic import TemplateView
 
 from .forms import SignUpForm
 from .lib.sugarcrm_api_py.SugarCRMAPI import SugarCRMAPI 
-import pdb
 
 class SignupView(TemplateView):
     template_name = "portal/signup.html"
+    form_class = SignUpForm
+    success_url = '/portal/signup-success/'
 
-def get_singup(request):
-    if request.method == 'POST':
-        # create a form instance and populate it with data from the request:
-        form = SignUpForm(request.POST)
-        # check whether it's valid:
+    def form_valid(self, form):
+        result = form.login_sugar()
+        return result
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST)
         if form.is_valid():
-            sugarApi = SugarCRMAPI(
-                form.cleaned_data['instance_url'], 
-                form.cleaned_data['client_id'], 
-                form.cleaned_data['client_secret']
-            )
-            pdb.set_trace()
-            result = sugarApi.oauth2_token(
-                form.cleaned_data['username'], 
-                form.cleaned_data['password']
-            )
+            result = self.form_valid(form)
             if result['status_code'] == 200: 
                 return HttpResponseRedirect('/portal/signup-success/')
             else:
-                return HttpResponseRedirect('/portal/signup-error/')
-            
-    # if a GET (or any other method) we'll create a blank form
-    else:
-        form = SignUpForm()
+                error = "No Responde sugar :("
+        return render(request, 'portal/signup.html', {'form': form, 'error': error})
 
-    return render(request, 'portal/signup.html', {'form': form})
 
 def get_singup_success(request):
     return render(request, 'portal/signup-success.html', {})
-
-def get_singup_error(request):
-    return render(request, 'portal/signup-error.html', {})

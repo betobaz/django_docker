@@ -3,6 +3,7 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
+{{error}}
 <form action="/portal/signup/" method="post">
     {% csrf_token %}
     {{ form|crispy }}
