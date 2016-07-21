@@ -35,6 +35,7 @@ class SignupView(TemplateView):
                     sugar_id = result['current_user']['id'],
                     access_token = result['response_dic']['access_token'],
                     refresh_token = result['response_dic']['refresh_token'],
+                    instance = instance
                 )
                 user.save()
                 return HttpResponseRedirect('/portal/signup-success/')
