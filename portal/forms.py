@@ -9,14 +9,17 @@ class SignUpForm(forms.Form):
     password = forms.CharField(label='Password', max_length=100, widget=forms.PasswordInput)
 
     def login_sugar(self):
-        sugarApi = SugarCRMAPI(
+        self.sugarApi = SugarCRMAPI(
             self.cleaned_data['instance_url'], 
             self.cleaned_data['client_id'], 
             self.cleaned_data['client_secret']
         )
-        result = sugarApi.oauth2_token(
+        result = self.sugarApi.oauth2_token(
             self.cleaned_data['username'], 
             self.cleaned_data['password']
         )
+        return result
 
+    def me(self):
+        result = self.sugarApi.call('get', 'me')
         return result
