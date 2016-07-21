@@ -14,14 +14,4 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RemoveField(
-            model_name='user',
-            name='uuid',
-        ),
-        migrations.AddField(
-            model_name='user',
-            name='id',
-            field=models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID'),
-            preserve_default=False,
-        ),
     ]

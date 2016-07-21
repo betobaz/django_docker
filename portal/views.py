@@ -1,10 +1,14 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 
+from django.views.generic import TemplateView
+
 from .forms import SignUpForm
 from .lib.sugarcrm_api_py.SugarCRMAPI import SugarCRMAPI 
 import pdb
 
+class SignupView(TemplateView):
+    template_name = "portal/signup.html"
 
 def get_singup(request):
     if request.method == 'POST':
@@ -17,6 +21,7 @@ def get_singup(request):
                 form.cleaned_data['client_id'], 
                 form.cleaned_data['client_secret']
             )
+            pdb.set_trace()
             result = sugarApi.oauth2_token(
                 form.cleaned_data['username'], 
                 form.cleaned_data['password']

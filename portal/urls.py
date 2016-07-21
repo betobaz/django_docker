@@ -9,7 +9,7 @@ urlpatterns = [
 	# URL pattern for the UserListView
     url(
         regex=r'^signup/$',
-        view=views.get_singup,
+        view=views.SignupView.as_view(),
         name='portal-signup'
     ),
     url(

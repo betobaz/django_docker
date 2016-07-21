@@ -24,7 +24,7 @@ class User(AbstractUser):
     instance = models.ForeignKey(Instance, on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self):
-        return self.sugar_username
+        return self.username
 
     def get_absolute_url(self):
-        return reverse('users:detail', kwargs={'sugar_username': self.sugar_username})
+        return reverse('users:detail', kwargs={'username': self.username})
