@@ -1,3 +1,4 @@
+@import url(https://fonts.googleapis.com/css?family=Lato:300);
 .alert-debug {
   background-color: #fff;
   border-color: #d6e9c6;
@@ -23,6 +24,78 @@
 
 [hidden][style="display: block;"] {
   display: block !important; }
+
+ul .tabs {
+  text-align: center;
+  display: block;
+  padding: 0;
+  margin: 0;
+  list-style: none; }
+
+img {
+  border: none;
+  width: 80%;
+  height: 80%; }
+
+.body {
+  font-family: "Lato", sans-serif; }
+
+.bg-overlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-image: url("../images/bg14.jpg"); }
+
+.container-fluid {
+  padding: 60px 80px; }
+
+.sidebar-menu {
+  position: relative;
+  z-index: 9;
+  padding-right: 80px; }
+
+.logo-wrapper {
+  background-color: #E5E8ED;
+  text-align: center;
+  padding: 40px; }
+  .logo-wrapper h1 {
+    font-size: 36px;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin: 0; }
+    .logo-wrapper h1 span {
+      margin-top: 10px;
+      display: block;
+      font-size: 14px;
+      font-weight: 400; }
+
+.menu-wrapper {
+  display: block; }
+  .menu-wrapper ul.menu {
+    display: none;
+    background-color: white;
+    text-align: center;
+    list-style: none;
+    padding: 0;
+    margin: 0; }
+    .menu-wrapper ul.menu li {
+      border-top: 1px solid #C7CDD8; }
+      .menu-wrapper ul.menu li a {
+        text-transform: uppercase;
+        display: block;
+        padding: 18px 30px;
+        color: #333333;
+        font-weight: 600;
+        font-size: 18px;
+        font-family: "Lato", sans-serif; }
+  .menu-wrapper a.toggle-menu {
+    display: block;
+    background-color: #d8aa46;
+    color: white;
+    text-align: center; }
+    .menu-wrapper a.toggle-menu i {
+      padding: 10px 20px;
+      font-size: 24px; }
 
 .navbar-dark .navbar-brand {
   color: white;

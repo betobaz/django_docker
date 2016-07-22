@@ -19,25 +19,86 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
 
     <!-- Your stuff: Third-party css libraries go here -->
+    <script src="https://use.fortawesome.com/45aaf320.js"></script>
     
     <!-- This file store project specific CSS -->
     <link href="{% static 'css/project.css' %}" rel="stylesheet">
-    
+   
     {% endblock %}
 
   </head>
 
   <body>
+
+  <!--MI PRUEBA EMPIEZA -->
+    <div class="bg-overlay"></div>
     <div class="m-b">
+      <nav class="navbar navbar-dark navbar-static-top bg-inverse">
+        <div class="container">
+          <ul class="nav navbar-nav pull-xs-right">
+              {% if request.user.is_authenticated %}
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'users:detail' request.user.username  %}">{% trans "Mi Perfil" %}</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'account_logout' %}">{% trans "Cerrar Sesión" %}</a>
+                </li>
+                
+              {% else %}
+                <li class="nav-item">
+                  <a id="sign-up-link" class="nav-link" href="{% url 'account_signup' %}">{% trans "Registro" %}</a>
+                </li>
+                <li class="nav-item">
+                  <a id="log-in-link" class="nav-link" href="{% url 'account_login' %}">{% trans "Iniciar Sesión" %}</a>
+                </li>
+              {% endif %}
+          </ul>
+        </div>
+      </nav>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-4 col-sm-12">
+          <div class="sidebar-menu">
+            <div class="logo-wrapper">
+              <h1 class="logo">
+                <a href="#"><img src="/static/images/actio_logo_completo.png" alt="actio_logo"></a>
+                <span>By MerxBP ®</span>
+              </h1>
+            </div>
+          <div class="menu-wrapper">
+          {% if request.user.is_authenticated %}
+            <ul class="menu">
+              <li><a class="homebutton" href="#">Home</a></li>
+              <li><a class="show-1" href="#">Usuarios</a></li>
+              <li><a class="show-2" href="#">Licencias</a></li>
+              <li><a class="show-3" href="#">Pagos en Línea</a></li>
+              <!--<li><a class="show-3" href="#">Entrar</a></li>-->
+            </ul>
+            {% else %}
+            {% endif %}
+              <a href="#" class="toggle-menu">
+                <i class="fa fa-bars"></i>
+              </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- MI PRUEBA TERMINA-->
+
+
+    <!--<div class="m-b">
       <nav class="navbar navbar-dark navbar-static-top bg-inverse">
         <div class="container">
           <a class="navbar-brand" href="/">Actio Control</a>
           <button type="button" class="navbar-toggler hidden-sm-up pull-xs-right" data-toggle="collapse" data-target="#bs-navbar-collapse-1">
             &#9776;
-          </button>
+          </button>-->
 
           <!-- Collect the nav links, forms, and other content for toggling -->
-          <div class="collapse navbar-toggleable-xs" id="bs-navbar-collapse-1">
+          <!--<div class="collapse navbar-toggleable-xs" id="bs-navbar-collapse-1">
             
             {% if request.user.is_authenticated %}
             <ul class="nav navbar-nav">
@@ -89,9 +150,16 @@
         <p>Use this document as a way to quick start any new project.</p>
       {% endblock content %}
 
-    </div> <!-- /container -->
+    </div> -->
+
+    <!-- /container -->
 
     {% block modal %}{% endblock modal %}
+
+    
+
+
+
 
     <!-- Le javascript
     ================================================== -->
@@ -107,10 +175,10 @@
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js" integrity="sha384-vZ2WRJMwsjRMW/8U7i6PWi6AlO1L79snBrmgiDpgIWJ82z8eA5lenwvxbMV1PAh7" crossorigin="anonymous"></script>
 
       <!-- Your stuff: Third-party javascript libraries go here -->
-
+      <script src="../static/js/project.js"></script>
       <!-- place project specific Javascript in this file -->
       
-      <script src="{% static 'js/project.js' %}"></script>
+      <!--<script src="{% static 'js/project.js' %}"></script>-->
       
 
     {% endblock javascript %}
