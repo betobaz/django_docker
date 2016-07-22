@@ -131,7 +131,7 @@ class TestSingupView(TestCase):
         self.assertEqual(user.access_token, 'access_token_123')
         self.assertEqual(user.refresh_token, 'refresh_token_123')
         self.assertEqual(user.sugar_id, "useradmin123")
+        self.assertEqual(user.sugar_type, "admin")
         self.assertTrue(user.instance)
         self.assertEqual(user.instance, instance)
 
-    

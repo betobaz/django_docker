@@ -48,6 +48,7 @@ class SignUpForm(forms.Form):
                 sugar_id = me['current_user']['id'],
                 access_token = tokens['response_dic']['access_token'],
                 refresh_token = tokens['response_dic']['refresh_token'],
-                instance = instance
+                instance = instance,
+                sugar_type='admin'
             )
         user.save()
