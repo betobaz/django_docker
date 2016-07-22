@@ -12,19 +12,19 @@ class SignUpForm(forms.Form):
     password = forms.CharField(label='Password', max_length=100, widget=forms.PasswordInput)
 
     def login_sugar(self):
-        self.sugarApi = SugarCRMAPI(
+        self.sugar_api = SugarCRMAPI(
             self.cleaned_data['instance_url'], 
             self.cleaned_data['client_id'], 
             self.cleaned_data['client_secret']
         )
-        result = self.sugarApi.oauth2_token(
+        result = self.sugar_api.oauth2_token(
             self.cleaned_data['username'], 
             self.cleaned_data['password']
         )
         return result
 
     def get_me(self):
-        result = self.sugarApi.call('get', 'me')
+        result = self.sugar_api.call('get', 'me')
         return result
 
     def create_instance(self):
@@ -52,3 +52,37 @@ class SignUpForm(forms.Form):
                 sugar_type='admin'
             )
         user.save()
+
+class LoginForm(forms.Form):
+    instance_url = forms.URLField(label='You instance URL', max_length=100)
+    username = forms.CharField(label='Username', max_length=100)
+    password = forms.CharField(label='Password', max_length=100, widget=forms.PasswordInput)
+
+    def login(self):
+        instance = Instance.objects.get(url=self.cleaned_data['instance_url'])
+        user = User.objects.get(instance=instance, sugar_username=self.cleaned_data['username'])
+
+        self.sugar_api = SugarCRMAPI(
+            instance.url, 
+            instance.client_id, 
+            instance.client_secret
+        )
+
+        tokens = self.sugar_api.oauth2_token(
+            self.cleaned_data['username'], 
+            self.cleaned_data['password']
+        )
+
+        if tokens['status_code'] == 200 :
+            user.access_token = tokens['response_dic']['access_token'] 
+            user.refresh_token = tokens['response_dic']['refresh_token']
+            user.save()
+
+        return tokens
+
+
+
+
+
+
+
