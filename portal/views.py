@@ -1,17 +1,17 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 
-from django.views.generic import TemplateView
+from django.views.generic import FormView
 
 from .forms import SignUpForm
 from .models import Instance
 from actio_control.users.models import User
 from .lib.sugarcrm_api_py.SugarCRMAPI import SugarCRMAPI 
 
-class SignupView(TemplateView):
-    template_name = "portal/signup.html"
-    form_class = SignUpForm
-    success_url = '/portal/signup-success/'
+class SignupView(FormView):
+    template_name="portal/signup.html"
+    form_class=SignUpForm
+    success_url='/portal/signup-success/'
 
     def form_valid(self, form):
         tokens = form.login_sugar()

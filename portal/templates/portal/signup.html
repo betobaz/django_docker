@@ -4,10 +4,14 @@
 
 {% block content %}
 {{error}}
-<form action="/portal/signup/" method="post">
-    {% csrf_token %}
-    {{ form|crispy }}
-    <input type="submit" value="Submit" />
-</form>
+<div class="row">
+	<div class="col-md-12">
+		<form action="/portal/signup/" method="post">
+		    {% csrf_token %}
+		    {{ form | crispy }}
+		    <input type="submit" value="Submit" />
+		</form>
+	<div>
+<div>
 {% endblock content %}
 
