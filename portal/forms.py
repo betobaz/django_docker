@@ -1,4 +1,7 @@
 from django import forms
+from .models import Instance
+from actio_control.users.models import User
+
 from .lib.sugarcrm_api_py.SugarCRMAPI import SugarCRMAPI 
 
 class SignUpForm(forms.Form):
@@ -20,6 +23,31 @@ class SignUpForm(forms.Form):
         )
         return result
 
-    def me(self):
+    def get_me(self):
         result = self.sugarApi.call('get', 'me')
         return result
+
+    def create_instance(self):
+        try:
+            instance = Instance.objects.get(url=self.cleaned_data['instance_url'])
+        except Instance.DoesNotExist:
+            instance = Instance(
+                url = self.cleaned_data['instance_url'], 
+                client_id = self.cleaned_data['client_id'], 
+                client_secret = self.cleaned_data['client_secret']
+            )
+            instance.save()
+        return instance
+
+    def create_user(self, tokens, me, instance):
+        try:
+            user = User.objects.get(instance__url=self.cleaned_data['instance_url'], sugar_id=me['current_user']['id'])
+        except User.DoesNotExist:
+            user = User(
+                sugar_username = self.cleaned_data['username'],
+                sugar_id = me['current_user']['id'],
+                access_token = tokens['response_dic']['access_token'],
+                refresh_token = tokens['response_dic']['refresh_token'],
+                instance = instance
+            )
+        user.save()

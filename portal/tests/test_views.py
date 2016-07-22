@@ -25,6 +25,10 @@ class TestSingupView(TestCase):
     def setUp(self):
         self.factory = RequestFactory()
 
+    def tearDown(self):
+        Instance.objects.all().delete()
+        User.objects.all().delete()
+
     def test_get_view(self):
         response = self.client.get('/portal/signup/')
         self.assertEqual(response.status_code, 200)
@@ -91,7 +95,7 @@ class TestSingupView(TestCase):
         self.assertContains(response, "No Responde sugar :(")
 
     @requests_mock.mock()
-    def test_post_create_instance(self, m):
+    def test_post_create_instance_user(self, m):
         url = 'https://merxbp.sugarondemand.com/'
         sugar_endpoint_token = '{0}rest/v10/oauth2/token'.format(url)
         sugar_endpoint_me = '{0}rest/v10/me'.format(url)
@@ -130,3 +134,4 @@ class TestSingupView(TestCase):
         self.assertTrue(user.instance)
         self.assertEqual(user.instance, instance)
 
+    

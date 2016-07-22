@@ -14,30 +14,20 @@ class SignupView(TemplateView):
     success_url = '/portal/signup-success/'
 
     def form_valid(self, form):
-        result = form.login_sugar()
-        if result['status_code'] == 200:
-            result['current_user'] = form.me()['current_user']
-        return result
+        tokens = form.login_sugar()
+        if tokens['status_code'] == 200:
+            instance = form.create_instance()
+            me = form.get_me()
+            if me['current_user']:
+                form.create_user(tokens, me, instance)
+                return True
+        return False
 
-    def post(self, request, *args, **kwargs):
+    def post(self, request):
         form = self.form_class(request.POST)
         if form.is_valid():
             result = self.form_valid(form)
-            if result['status_code'] == 200: 
-                instance = Instance(
-                    url = form.cleaned_data['instance_url'], 
-                    client_id = form.cleaned_data['client_id'], 
-                    client_secret = form.cleaned_data['client_secret']
-                )
-                instance.save()
-                user = User(
-                    sugar_username = form.cleaned_data['username'],
-                    sugar_id = result['current_user']['id'],
-                    access_token = result['response_dic']['access_token'],
-                    refresh_token = result['response_dic']['refresh_token'],
-                    instance = instance
-                )
-                user.save()
+            if result: 
                 return HttpResponseRedirect('/portal/signup-success/')
             else:
                 error = "No Responde sugar :("
