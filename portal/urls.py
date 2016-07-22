@@ -10,7 +10,7 @@ urlpatterns = [
     url(
         regex=r'^signup/$',
         view=views.SignupView.as_view(),
-        name='portal-signup'
+        name='portal_signup'
     ),
     url(
         regex=r'^signup-success/$',
