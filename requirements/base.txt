@@ -54,3 +54,4 @@ redis>=2.10.0
 # request
 requests==2.10.0
 requests-toolbelt==0.6.2
+sqlparse<0.2
