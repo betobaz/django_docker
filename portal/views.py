@@ -13,6 +13,7 @@ from .models import Instance
 from actio_control.users.models import User
 from .lib.sugarcrm_api_py.SugarCRMAPI import SugarCRMAPI 
 
+
 class SignupView(FormView):
     template_name="portal/signup.html"
     form_class=SignUpForm
@@ -57,6 +58,10 @@ class SigninView(FormView):
         else:
             error = "Credenciales invalidas"
         return render(request, 'portal/signin.html', {'form': form, 'error':error})
+
+
+
+
 
 def get_singup_success(request):
     return render(request, 'portal/signup-success.html', {})

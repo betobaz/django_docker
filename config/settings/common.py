@@ -40,6 +40,7 @@ THIRD_PARTY_APPS = (
     'allauth.account',  # registration
     'allauth.socialaccount',  # registration
     # 'bootstrap_themes', # Twitter bootstrap
+    'rest_framework',
 )
 
 # Apps specific for this project go here.
@@ -48,6 +49,7 @@ LOCAL_APPS = (
     'actio_control.users.apps.UsersConfig',
     # Your stuff: custom apps go here
     'portal.apps.PortalConfig',
+    'api.apps.ApiConfig',
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps

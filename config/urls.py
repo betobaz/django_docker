@@ -21,6 +21,7 @@ urlpatterns = [
 
     # Your stuff: custom urls includes go here
     url(r'^portal/', include('portal.urls', namespace='portal')),
+    url(r'^api/', include('api.urls', namespace='api')),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
