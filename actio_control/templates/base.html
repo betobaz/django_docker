@@ -38,7 +38,7 @@
           <ul class="nav navbar-nav pull-xs-right">
               {% if request.user.is_authenticated %}
                 <li class="nav-item">
-                  <a class="nav-link" href="{% url 'users:detail' request.user.username  %}">{% trans "Mi Perfil" %}</a>
+                  <a class="nav-link" href="/">{% trans "Mi Perfil" %}</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="{% url 'account_logout' %}">{% trans "Cerrar Sesión" %}</a>
@@ -46,10 +46,10 @@
                 
               {% else %}
                 <li class="nav-item">
-                  <a id="sign-up-link" class="nav-link" href="{% url 'account_signup' %}">{% trans "Registro" %}</a>
+                  <a id="sign-up-link" class="nav-link" href="{% url 'portal:signup' %}">{% trans "Registro" %}</a>
                 </li>
                 <li class="nav-item">
-                  <a id="log-in-link" class="nav-link" href="{% url 'account_login' %}">{% trans "Iniciar Sesión" %}</a>
+                  <a id="log-in-link" class="nav-link" href="{% url 'portal:login' %}">{% trans "Iniciar Sesión" %}</a>
                 </li>
               {% endif %}
           </ul>
@@ -115,24 +115,7 @@
             {% else %}
             {% endif %}
 
-            <ul class="nav navbar-nav pull-xs-right">
-              {% if request.user.is_authenticated %}
-                <li class="nav-item">
-                  <a class="nav-link" href="{% url 'users:detail' request.user.username  %}">{% trans "My Profile" %}</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="{% url 'account_logout' %}">{% trans "Sign out" %}</a>
-                </li>
-                
-              {% else %}
-                <li class="nav-item">
-                  <a id="sign-up-link" class="nav-link" href="{% url 'account_signup' %}">{% trans "Sign Up" %}</a>
-                </li>
-                <li class="nav-item">
-                  <a id="log-in-link" class="nav-link" href="{% url 'account_login' %}">{% trans "Sign In" %}</a>
-                </li>
-              {% endif %}
-            </ul>
+            
           </div>
         </div>
       </nav>

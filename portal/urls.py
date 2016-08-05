@@ -10,11 +10,16 @@ urlpatterns = [
     url(
         regex=r'^signup/$',
         view=views.SignupView.as_view(),
-        name='portal-signup'
+        name='signup'
+    ),
+    url(
+        regex=r'^signin/$',
+        view=views.SigninView.as_view(),
+        name='login'
     ),
     url(
         regex=r'^signup-success/$',
         view=views.get_singup_success,
-        name='portal-signup-success'
+        name='signup_success'
     ),
 ]

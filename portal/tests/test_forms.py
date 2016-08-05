@@ -6,7 +6,7 @@ import requests_mock
 
 from ..forms import (
     SignUpForm,
-    LoginForm
+    SignInForm
 )
 
 from ..models import Instance
@@ -77,11 +77,11 @@ class TestSingupForm(TestCase):
         user = form.create_user(tokens, me, instance)
         self.assertEqual(len(User.objects.all()), 1)
 
-class TestLoginForm(TestCase):
+class TestSignInForm(TestCase):
 
     def setUp(self):
         self.url = 'https://merxbp.sugarondemand.com/'
-        self.form = LoginForm({
+        self.form = SignInForm({
             'instance_url': self.url,
             'username': 'admin',
             'password': 'password',

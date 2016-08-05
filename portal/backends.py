@@ -6,8 +6,14 @@ class ActioBackend(object):
 
     def authenticate(self, url=None, username=None, password=None):
         try:
+            print("ActioBackend:authenticate: url:{0}".format(url))
+            print("ActioBackend:authenticate: username:{0}".format(username))
+            print("ActioBackend:authenticate: password:{0}".format(password))
+            
             instance = Instance.objects.get(url=url)
+            print("ActioBackend:authenticate: Hay instancia")
             user = User.objects.get(instance=instance, sugar_username=username)
+            print("ActioBackend:authenticate: Hay instancia")
 
             sugar_api = SugarCRMAPI(
                 instance.url, 
@@ -36,7 +42,10 @@ class ActioBackend(object):
 
     def get_user(self, user_id):
         try:
-            return User.objects.get(pk=user_id)
+            user = User.objects.get(pk=user_id)
+            if user.is_active:
+                return user
+            return None
         except User.DoesNotExist:
             return None
 

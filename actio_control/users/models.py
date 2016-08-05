@@ -17,9 +17,9 @@ class User(AbstractUser):
 
     # First Name and Last Name do not cover name patterns
     # around the globe.
-    #uuid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     SUGAR_TYPES = Choices('normal', 'admin')
     
+    # id = models.AutoField(primary_key=True)
     name = models.CharField(_('Name'), blank=True, max_length=255)
     sugar_username = models.CharField(_('Sugar Username'), blank=True, max_length=255)
     sugar_id = models.CharField(_('Sugar ID'), blank=True, max_length=255)

@@ -53,7 +53,7 @@ class SignUpForm(forms.Form):
             )
         user.save()
 
-class LoginForm(forms.Form):
+class SignInForm(forms.Form):
     instance_url = forms.URLField(label='You instance URL', max_length=100)
     username = forms.CharField(label='Username', max_length=100)
     password = forms.CharField(label='Password', max_length=100, widget=forms.PasswordInput)
