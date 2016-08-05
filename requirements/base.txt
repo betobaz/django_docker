@@ -55,3 +55,6 @@ redis>=2.10.0
 requests==2.10.0
 requests-toolbelt==0.6.2
 sqlparse<0.2
+djangorestframework==3.4.3
+markdown==2.6.6
+django-filter==0.13.0
