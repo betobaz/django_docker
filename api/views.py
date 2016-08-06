@@ -27,10 +27,10 @@ class LoginView(APIView):
             user.access_token = tokens['response_dic']['access_token'] 
             user.refresh_token = tokens['response_dic']['refresh_token']
             user.save()
+            return Response({'user': user.id})
         else:
             return Response(status=status.HTTP_404_NOT_FOUND)            
 
-        return Response({'user': user.id})
 
 class SearchView(APIView):
     def get(self, request, format=None):
@@ -45,10 +45,13 @@ class SearchView(APIView):
                     user.instance.client_id, 
                     user.instance.client_secret
                 )
-                sugar_api.set_token(user.access_token)
-                sugar_api.set_refresh_token(user.refresh_token)
-                print("globalsearch?tags=false&q={0}&fields=id,name".format(q))
+                sugar_api.access_token = user.access_token
+                sugar_api.refresh_token = user.refresh_token
                 result = sugar_api.call("get", "globalsearch?tags=false&q={0}".format(q))
+                if user.access_token != sugar_api.access_token:
+                    user.access_token = sugar_api.access_token 
+                    user.refresh_token = sugar_api.access_token
+                    user.save()
         except MultiValueDictKeyError:
             result = {} 
         return Response({'result': result})
